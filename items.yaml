@@ -1,0 +1,13 @@
+helm_of_might:
+  name: "Helm of Might"
+  image: "helm_01"
+  stats:
+    attack: 1
+    defence: 1
+
+sword_of_power:
+  name: "Sword of Power"
+  image: "sword_01"
+  stats:
+    attack: 2
+    defence: 0

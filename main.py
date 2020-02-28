@@ -1,9 +1,12 @@
 import pgzrun
+import yaml
+
 
 from pgzero.builtins import *
 from map import GameMap
 from player import Player
 from state import GameState
+from item import Item
 
 WIDTH = 600
 HEIGHT = 400
@@ -19,7 +22,7 @@ DEBUG = False
 game_state = GameState()
 player = Player('player', OFFSET+SPRITE_SIZE, OFFSET+SPRITE_SIZE)
 game_map = GameMap(MAP_WIDTH, MAP_HEIGHT)
-
+game_items = []
 
 # Handle player movement
 def on_key_up(key):
@@ -46,6 +49,22 @@ def draw():
     draw_ui()
     if game_state.show_inventory:
         draw_inventory()
+
+
+# load items
+def load_items():
+    with open("items.yaml", 'r') as stream:
+        item_data = yaml.safe_load(stream)
+
+    for item in item_data:
+        game_items.append(Item(
+            item_data[item]['image'],
+            item_data[item]['name'],
+            item_data[item]['stats']['attack'],
+            item_data[item]['stats']['defence']
+        ))
+
+
 
 # UI
 def draw_ui():
@@ -93,4 +112,6 @@ def draw_inventory():
     screen.blit('menu/corner_bottom_right', (_START_X+_INV_WIDTH-SPRITE_SIZE, _START_Y+_INV_HEIGHT-SPRITE_SIZE))
 
 
+load_items()
+print(game_items)
 pgzrun.go()
