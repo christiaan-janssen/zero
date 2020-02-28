@@ -1,9 +1,9 @@
 import pgzrun
 
 from pgzero.builtins import *
-from utils import debug_log
 from map import GameMap
 from player import Player
+from state import GameState
 
 WIDTH = 600
 HEIGHT = 400
@@ -16,8 +16,8 @@ OFFSET = 4
 
 DEBUG = False
 
+game_state = GameState()
 player = Player('player', OFFSET+SPRITE_SIZE, OFFSET+SPRITE_SIZE)
-
 game_map = GameMap(MAP_WIDTH, MAP_HEIGHT)
 
 
@@ -35,6 +35,8 @@ def on_key_up(key):
         player.hp -= 1
     if key == keys.D:
         player.hp += 1
+    if key == keys.I:
+        game_state.toggle_inventory()
 
 
 def draw():
@@ -42,7 +44,8 @@ def draw():
     game_map.draw()
     player.draw()
     draw_ui()
-
+    if game_state.show_inventory:
+        draw_inventory()
 
 # UI
 def draw_ui():
@@ -74,6 +77,20 @@ def draw_ui():
     screen.blit('t', (SPRITE_SIZE+OFFSET+26*SPRITE_SIZE, 19*16))
     screen.blit('h', (SPRITE_SIZE+OFFSET+27*SPRITE_SIZE, 19*16))
     screen.blit('coln', (SPRITE_SIZE+OFFSET+28*SPRITE_SIZE, 19*16))
+
+
+def draw_inventory():
+    _START_X = 4*SPRITE_SIZE+OFFSET
+    _START_Y = 2*SPRITE_SIZE+OFFSET
+    _INV_WIDTH = 29*SPRITE_SIZE
+    _INV_HEIGHT = 20*SPRITE_SIZE
+    # Create a back ground for the inventory, Rect takes
+    screen.draw.filled_rect(Rect(_START_X, _START_Y, _INV_WIDTH, _INV_HEIGHT), (71, 45, 60))
+
+    screen.blit('menu/corner_top_left', (_START_X, _START_Y))
+    screen.blit('menu/corner_top_right', (_START_X+_INV_WIDTH-SPRITE_SIZE, _START_Y))
+    screen.blit('menu/corner_bottom_left', (_START_X, _START_Y+_INV_HEIGHT-SPRITE_SIZE))
+    screen.blit('menu/corner_bottom_right', (_START_X+_INV_WIDTH-SPRITE_SIZE, _START_Y+_INV_HEIGHT-SPRITE_SIZE))
 
 
 pgzrun.go()
