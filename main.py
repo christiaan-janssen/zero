@@ -24,8 +24,9 @@ player = Player('player', OFFSET+SPRITE_SIZE, OFFSET+SPRITE_SIZE)
 game_map = GameMap(MAP_WIDTH, MAP_HEIGHT)
 game_items = []
 
+
 # Handle player movement
-def on_key_up(key):
+def on_key_up(key) -> None:
     if key == keys.RIGHT:
         player.x += 16
     if key == keys.LEFT:
@@ -42,7 +43,7 @@ def on_key_up(key):
         game_state.toggle_inventory()
 
 
-def draw():
+def draw() -> None:
     screen.fill((71, 45, 60))
     game_map.draw()
     player.draw()
@@ -52,7 +53,7 @@ def draw():
 
 
 # load items
-def load_items():
+def load_items() -> None:
     with open("items.yaml", 'r') as stream:
         item_data = yaml.safe_load(stream)
 
@@ -67,7 +68,7 @@ def load_items():
 
 
 # UI
-def draw_ui():
+def draw_ui() -> None:
     """Draw the game ui"""
     # Corners:
     screen.blit('menu/corner_top_left', (OFFSET, 18*SPRITE_SIZE))
@@ -98,7 +99,7 @@ def draw_ui():
     screen.blit('coln', (SPRITE_SIZE+OFFSET+28*SPRITE_SIZE, 19*16))
 
 
-def draw_inventory():
+def draw_inventory() -> None:
     _START_X = 4*SPRITE_SIZE+OFFSET
     _START_Y = 2*SPRITE_SIZE+OFFSET
     _INV_WIDTH = 29*SPRITE_SIZE

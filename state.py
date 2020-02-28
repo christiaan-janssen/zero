@@ -4,5 +4,5 @@ class GameState:
         self.show_inventory = False
         self.debug = False
 
-    def toggle_inventory(self):
+    def toggle_inventory(self) -> None:
         self.show_inventory = not self.show_inventory

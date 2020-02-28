@@ -1,6 +1,6 @@
 
 class Item:
-    def __init__(self, image, name, attack=0, defence=0):
+    def __init__(self, image: str, name: str, attack: int, defence: int):
         self.image = image
         self.name = name
         self.attack = attack
