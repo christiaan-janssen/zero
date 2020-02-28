@@ -1,6 +1,7 @@
 helm_of_might:
   name: "Helm of Might"
   image: "helm_01"
+  type: "helm"
   stats:
     attack: 1
     defence: 1
@@ -8,6 +9,7 @@ helm_of_might:
 sword_of_power:
   name: "Sword of Power"
   image: "sword_01"
+  type: "sword"
   stats:
     attack: 2
     defence: 0

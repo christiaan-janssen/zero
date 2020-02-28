@@ -1,4 +1,5 @@
 from pgzero.builtins import Actor
+import random
 
 
 class Player(Actor):
@@ -11,6 +12,8 @@ class Player(Actor):
         self.hp = hp
         self.power = 1
         self.defence = 1
+        self.helm = None
+        self.sword = None
         self.inventory = []
 
     def take_damage(self, amount: int) -> None:
